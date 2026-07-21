@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saves Hollow Knight - Nicollas Studios</title>
+    <style>
+        /* Cores e Tema do Hollow Knight */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0d0914;
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            margin-top: 30px;
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+            text-shadow: 0 0 10px #9a73ef;
+        }
+
+        p.subtitle {
+            color: #a292bf;
+            font-size: 1.1rem;
+            margin-top: 0;
+        }
+
+        /* Banner/Foto do Jogo */
+        .banner-container {
+            width: 90%;
+            max-width: 500px;
+            margin: 20px 0;
+            border: 2px solid #5a3ca3;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(154, 115, 239, 0.3);
+        }
+
+        .banner-container img {
+            width: 100%;
+            display: block;
+        }
+
+        /* Botão de Dúvida (?) */
+        .help-icon {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            background-color: #5a3ca3;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border: 2px solid #9a73ef;
+            transition: 0.3s;
+        }
+
+        .help-icon:hover {
+            background-color: #9a73ef;
+            transform: scale(1.1);
+        }
+
+        /* Container dos Saves */
+        .saves-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 90%;
+            max-width: 400px;
+            margin-top: 20px;
+        }
+
+        .save-card {
+            background: linear-gradient(135deg, #1b1424, #120c1a);
+            border: 1px solid #3a2a54;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .save-card:hover {
+            border-color: #9a73ef;
+            transform: translateY(-2px);
+        }
+
+        .save-card h3 {
+            margin: 0 0 10px 0;
+            color: #b093f6;
+            font-size: 1.4rem;
+        }
+
+        .save-card p {
+            margin: 0 0 15px 0;
+            color: #b3b3b3;
+            font-size: 0.95rem;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            font-size: 0.8rem;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .status-liberado {
+            background-color: #1b4d22;
+            color: #7cfc00;
+            border: 1px solid #2e7d32;
+        }
+
+        .download-btn {
+            display: inline-block;
+            background-color: #5a3ca3;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: 0.3s;
+            border: 1px solid #9a73ef;
+            cursor: pointer;
+            width: 80%;
+            box-sizing: border-box;
+        }
+
+        .download-btn:hover {
+            background-color: #9a73ef;
+            box-shadow: 0 0 10px rgba(154, 115, 239, 0.5);
+        }
+
+        /* Janela do Tutorial (Modal) */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .modal-content {
+            background-color: #161021;
+            border: 2px solid #9a73ef;
+            border-radius: 10px;
+            padding: 25px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 0 25px rgba(154, 115, 239, 0.4);
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+            color: #9a73ef;
+            border-bottom: 1px solid #3a2a54;
+            padding-bottom: 10px;
+        }
+
+        .modal-content ol {
+            padding-left: 20px;
+            line-height: 1.6;
+        }
+
+        .modal-content li {
+            margin-bottom: 12px;
+            color: #dcdcdc;
+        }
+
+        .close-btn {
+            background-color: #d9534f;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            float: right;
+            margin-top: 10px;
+        }
+
+        .close-btn:hover {
+            background-color: #c9302c;
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 20px;
+            color: #564c63;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Save do Hollow Knight</h1>
+        <p class="subtitle">Disponibilizado por Nicollas Studios &reg;</p>
+        <div class="help-icon" onclick="abrirTutorial()">?</div>
+    </header>
+
+    <!-- Banner do Jogo -->
+    <div class="banner-container">
+        <img src="https://images.alphacoders.com/100/1004944.jpg" alt="Silksong">
+    </div>
+
+    <p style="text-align: center; max-width: 450px; padding: 0 20px; color: #b3a7c4;">
+        Pegue o meu save modificado para jogar rápido e sem preguiça! Escolha a versão ideal para você.
+    </p>
+
+    <div class="saves-container">
+        <!-- Versão 1.0 (Liberada) -->
+        <div class="save-card">
+            <span class="status-badge status-liberado">✓ LIBERADO</span>
+            <h3>Versão 1.0</h3>
+            <p>Esta versão está liberada! Baixe e use à vontade.</p>
+            <a href="https://github.com/fatimaluciana1984-coder/Save-do-rola-night/raw/refs/heads/main/seve%201.zip" class="download-btn" target="_blank">Baixar .ZIP V1.0</a>
+        </div>
+
+        <!-- Versão 2.0 (Liberada com o novo link) -->
+        <div class="save-card">
+            <span class="status-badge status-liberado">✓ LIBERADO</span>
+            <h3>Versão 2.0</h3>
+            <p>A versão mais forte e atualizada com tudo pronto!</p>
+            <a href="https://github.com/fatimaluciana1984-coder/Save-do-rola-night45/raw/refs/heads/main/seve%202.zip" class="download-btn" target="_blank">Baixar .ZIP V2.0</a>
+        </div>
+    </div>
+
+    <!-- Janela de Tutorial Oculta -->
+    <div class="modal" id="tutorialModal">
+        <div class="modal-content">
+            <h2>Como Instalar o Save</h2>
+            <ol>
+                <li>Baixe o arquivo <strong>.ZIP</strong> da versão desejada.</li>
+                <li>Abra o gerenciador de arquivos e extraia o arquivo do ZIP.</li>
+                <li>Copie o arquivo extraído.</li>
+                <li>Cole na pasta do jogo no seu celular em: <br>
+                <code style="color: #38ef7d; word-break: break-all;">Android/data/com.teamcherry.hollowknight/files/</code></li>
+                <li>Abra o jogo e divirta-se!</li>
+            </ol>
+            <button class="close-btn" onclick="fecharTutorial()">Voltar</button>
+        </div>
+    </div>
+
+    <footer>
+        Nicollas Studios &copy; 2026 - Todos os direitos reservados.
+    </footer>
+
+    <script>
+        function abrirTutorial() {
+            document.getElementById('tutorialModal').style.display = 'flex';
+        }
+
+        function fecharTutorial() {
+            document.getElementById('tutorialModal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
